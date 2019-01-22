@@ -1,0 +1,25 @@
+﻿<!doctype html>
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewBag.Title ?? ResourceProvider.GetPageTitle(ViewContext.RouteData.Values))</title>
+
+    @Styles.Render("~/content/public/lib.css")
+    @Html.RenderControllerStyle()
+    @Html.RenderActionStyle()
+</head>
+<body class="public">
+    <div class="content-container">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/scripts/public/lib.js")
+    @Html.RenderControllerScript()
+    @Html.RenderActionScript()
+    @Scripts.Render("~/scripts/app/shared.js")
+</body>
+</html>

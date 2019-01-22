@@ -1,0 +1,15 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+public static <#= Model.Model #> Create<#= Model.Model #>(Int32 id = 0)
+{
+    return new <#= Model.Model #>
+    {
+    };
+}
+public static <#= Model.View #> Create<#= Model.View #>(Int32 id = 0)
+{
+    return new <#= Model.View #>
+    {
+        Id = id
+    };
+}

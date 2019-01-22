@@ -1,0 +1,37 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cshtml" #>
+@model <#= Model.View #>
+
+<div class="col">
+    <div class="widget-box readonly">
+        <div class="widget-header">
+            <span class="icon fa fa-th-list"></span>
+            <h5>@Headers.<#= Model.Model #></h5>
+            <div class="widget-header-buttons">
+                @if (Html.IsAuthorizedFor("Details"))
+                {
+                    <a class="btn" href="@Url.Action("Details", new { Model.Id })">
+                        <span class="fa fa-info"></span><span class="text">@Actions.Details</span>
+                    </a>
+                }
+                @if (Html.IsAuthorizedFor("Edit"))
+                {
+                    <a class="btn" href="@Url.Action("Edit", new { Model.Id })">
+                        <span class="fa fa-pencil-alt"></span><span class="text">@Actions.Edit</span>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="widget-content">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="form-actions col-lg-7">
+                        <button type="submit" class="btn btn-primary">@Actions.Submit</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

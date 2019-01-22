@@ -1,0 +1,26 @@
+﻿@using RadyaLabs.Resources.Views.Auth.AccountRecoveryView
+
+@model AccountRecoveryView
+
+<div class="title text">@Pages.AuthRecover</div>
+<div class="separator"></div>
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("_AuthAlerts")
+
+    @Html.AntiForgeryToken()
+    <div class="auth-content">
+        <div class="input-group">
+            <span class="fa fa-envelope"></span>
+            @Html.TextBoxFor(model => model.Email, new { autocomplete = "off", placeholder = Titles.Email })
+            <span class="input-error fa fa-exclamation-triangle"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">@Actions.Recover</button>
+}
+
+<div class="separator"></div>
+<div class="auth-actions">
+    <a class="text fa fa-sign-in-alt" href="@Url.Action("Login")" data-toggle="tooltip" data-original-title="@Actions.Login" data-placement="bottom" data-delay="1"></a>
+</div>

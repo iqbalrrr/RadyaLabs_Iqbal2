@@ -1,0 +1,84 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+using RadyaLabs.Data.Core;
+using RadyaLabs.Objects;
+using RadyaLabs.Tests.Data;
+using RadyaLabs.Validators;
+using System;
+using Xunit;
+
+namespace RadyaLabs.Tests.Unit.Validators
+{
+    public class <#= Model.Validator #>Tests : IDisposable
+    {
+        private <#= Model.Validator #> validator;
+        private TestingContext context;
+        private <#= Model.Model #> <#= Model.ModelVarName #>;
+
+        public <#= Model.Validator #>Tests()
+        {
+            context = new TestingContext();
+            validator = new <#= Model.Validator #>(new UnitOfWork(context));
+
+            context.DropData();
+            SetUpData();
+        }
+        public void Dispose()
+        {
+            context.Dispose();
+            validator.Dispose();
+        }
+
+        #region CanCreate(<#= Model.View #> view)
+
+        [Fact]
+        public void CanCreate_InvalidState_ReturnsFalse()
+        {
+            validator.ModelState.AddModelError("Test", "Test");
+
+            Assert.False(validator.CanCreate(ObjectFactory.Create<#= Model.View #>(1)));
+        }
+
+        [Fact]
+        public void CanCreate_Valid<#= Model.ShortModel #>()
+        {
+            Assert.True(validator.CanCreate(ObjectFactory.Create<#= Model.View #>(1)));
+            Assert.Empty(validator.ModelState);
+            Assert.Empty(validator.Alerts);
+        }
+
+        #endregion
+
+        #region CanEdit(<#= Model.View #> view)
+
+        [Fact]
+        public void CanEdit_InvalidState_ReturnsFalse()
+        {
+            validator.ModelState.AddModelError("Test", "Test");
+
+            Assert.False(validator.CanEdit(ObjectFactory.Create<#= Model.View #>(<#= Model.ModelVarName #>.Id)));
+        }
+
+        [Fact]
+        public void CanEdit_Valid<#= Model.ShortModel #>()
+        {
+            Assert.True(validator.CanEdit(ObjectFactory.Create<#= Model.View #>(<#= Model.ModelVarName #>.Id)));
+            Assert.Empty(validator.ModelState);
+            Assert.Empty(validator.Alerts);
+        }
+
+        #endregion
+
+        #region Test helpers
+
+        private void SetUpData()
+        {
+            <#= Model.ModelVarName #> = ObjectFactory.Create<#= Model.Model #>();
+
+            context.Set<<#= Model.Model #>>().Add(<#= Model.ModelVarName #>);
+            context.SaveChanges();
+        }
+
+        #endregion
+    }
+}

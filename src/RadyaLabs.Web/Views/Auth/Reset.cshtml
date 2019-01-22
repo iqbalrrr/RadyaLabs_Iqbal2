@@ -1,0 +1,24 @@
+﻿@using RadyaLabs.Resources.Views.Auth.AccountResetView
+
+@model AccountResetView
+
+<div class="title text">@Pages.AuthReset</div>
+<div class="separator"></div>
+
+@using (Html.BeginForm())
+{
+    <input class="collapse" type="password" /> @* Forcing browser to not remember following form inputs *@
+    @Html.Partial("_AuthAlerts")
+
+    @Html.AntiForgeryToken()
+    <div class="auth-content">
+        <div class="input-group">
+            <span class="fa fa-lock"></span>
+            @Html.PasswordFor(model => model.NewPassword, new { autocomplete = "off", placeholder = Titles.NewPassword })
+            <span class="input-error fa fa-exclamation-triangle"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">@Actions.Submit</button>
+}
+
+<div class="separator"></div>

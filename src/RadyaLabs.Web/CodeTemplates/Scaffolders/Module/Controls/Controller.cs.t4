@@ -1,0 +1,88 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+<# if (Model.Area != null && Model.Area != "") { #>
+using RadyaLabs.Components.Mvc;
+<# } #>
+using RadyaLabs.Objects;
+using RadyaLabs.Services;
+using RadyaLabs.Validators;
+using System;
+using System.Web.Mvc;
+
+namespace <#= Model.ControllerNamespace #>
+{
+<# if (Model.Area != null && Model.Area != "") { #>
+    [Area("<#= Model.Area #>")]
+<# } #>
+    public class <#= Model.Controller #> : ValidatedController<<#= Model.IValidator #>, <#= Model.IService #>>
+    {
+        public <#= Model.Controller #>(<#= Model.IValidator #> validator, <#= Model.IService #> service)
+            : base(validator, service)
+        {
+        }
+
+        [HttpGet]
+        public ViewResult Index()
+        {
+            return View(Service.GetViews());
+        }
+
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Exclude = "Id")] <#= Model.View #> <#= Model.ModelVarName #>)
+        {
+            if (!Validator.CanCreate(<#= Model.ModelVarName #>))
+                return View(<#= Model.ModelVarName #>);
+
+            Service.Create(<#= Model.ModelVarName #>);
+
+            return RedirectIfAuthorized("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Details(Int32 id)
+        {
+            return NotEmptyView(Service.Get<<#= Model.View #>>(id));
+        }
+
+        [HttpGet]
+        public ActionResult Edit(Int32 id)
+        {
+            return NotEmptyView(Service.Get<<#= Model.View #>>(id));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(<#= Model.View #> <#= Model.ModelVarName #>)
+        {
+            if (!Validator.CanEdit(<#= Model.ModelVarName #>))
+                return View(<#= Model.ModelVarName #>);
+
+            Service.Edit(<#= Model.ModelVarName #>);
+
+            return RedirectIfAuthorized("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(Int32 id)
+        {
+            return NotEmptyView(Service.Get<<#= Model.View #>>(id));
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(Int32 id)
+        {
+            Service.Delete(id);
+
+            return RedirectIfAuthorized("Index");
+        }
+    }
+}

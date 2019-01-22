@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="..\..\packages\xunit.core.2.4.1\build\xunit.core.props" Condition="Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BE2D3CAD-747C-4CC3-850B-883420C40EC9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RadyaLabs.Tests</RootNamespace>
+    <AssemblyName>RadyaLabs.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <AllowedReferenceRelatedFileExtensions>.pdb</AllowedReferenceRelatedFileExtensions>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Datalist.Core, Version=6.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Datalist.Core.6.2.0\lib\net45\Datalist.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LightInject, Version=5.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LightInject.5.2.1\lib\net46\LightInject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LightInject.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LightInject.Mvc.2.0.0\lib\net46\LightInject.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LightInject.Web, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\LightInject.Web.2.0.0\lib\net46\LightInject.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mvc.Grid.Core, Version=6.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NonFactors.Grid.Core.Mvc5.6.0.1\lib\net45\Mvc.Grid.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NSubstitute.3.1.0\lib\net46\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.IO" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.abstractions.2.0.3\lib\net35\xunit.abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.assert.2.4.1\lib\netstandard1.1\xunit.assert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.core.2.4.1\lib\net452\xunit.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xunit.extensibility.execution.2.4.1\lib\net452\xunit.execution.desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\RadyaLabs\RadyaLabs.csproj">
+      <Project>{ddc2aad3-eebd-456f-a0ed-ea3900478b45}</Project>
+      <Name>RadyaLabs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\RadyaLabs.Components\RadyaLabs.Components.csproj">
+      <Project>{4d89de56-c68c-4d17-8424-866d96f2e000}</Project>
+      <Name>RadyaLabs.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\RadyaLabs.Controllers\RadyaLabs.Controllers.csproj">
+      <Project>{8531b9ae-c8c5-4b73-a0ce-b9cdfad69074}</Project>
+      <Name>RadyaLabs.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\RadyaLabs.Data\RadyaLabs.Data.csproj">
+      <Project>{4ec117ab-87ff-4360-bd49-8e29d2d71d89}</Project>
+      <Name>RadyaLabs.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\RadyaLabs.Objects\RadyaLabs.Objects.csproj">
+      <Project>{8a9dc311-3844-4024-a193-8f89b60d1fd8}</Project>
+      <Name>RadyaLabs.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\RadyaLabs.Resources\RadyaLabs.Resources.csproj">
+      <Project>{0bc1938b-b09c-4951-9ccb-13ee2c61d65c}</Project>
+      <Name>RadyaLabs.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\RadyaLabs.Services\RadyaLabs.Services.csproj">
+      <Project>{4ad95521-f99c-4054-a2ad-1fae1dabd72e}</Project>
+      <Name>RadyaLabs.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\RadyaLabs.Validators\RadyaLabs.Validators.csproj">
+      <Project>{02d12b45-ab59-4ac0-8b43-607e4dc282e6}</Project>
+      <Name>RadyaLabs.Validators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\RadyaLabs.Web\RadyaLabs.Web.csproj">
+      <Project>{b201b326-86eb-4abd-aebb-0dde4c4a5366}</Project>
+      <Name>RadyaLabs.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\Migrations\Configuration.cs" />
+    <Compile Include="Data\TestingContext.cs" />
+    <Compile Include="Helpers\HtmlHelperFactory.cs" />
+    <Compile Include="Helpers\HttpContextFactory.cs" />
+    <Compile Include="Helpers\ObjectFactory.cs" />
+    <Compile Include="Objects\Models\AdaptersModel.cs" />
+    <Compile Include="Objects\Models\TestModel.cs" />
+    <Compile Include="Objects\Views\AllTypesView.cs" />
+    <Compile Include="Objects\Views\TestView.cs" />
+    <Compile Include="Unit\Components\Alerts\AlertsContainerTests.cs" />
+    <Compile Include="Unit\Components\Datalists\DatalistTests.cs" />
+    <Compile Include="Unit\Components\Extensions\Bootstrap\BootstrapAdvancedModel.cs" />
+    <Compile Include="Unit\Components\Extensions\Bootstrap\BootstrapExtensionsTests.cs" />
+    <Compile Include="Unit\Components\Extensions\Bootstrap\BootstrapModel.cs" />
+    <Compile Include="Unit\Components\Extensions\MvcGrid\MvcGridExtensionsTests.cs" />
+    <Compile Include="Unit\Components\Extensions\MvcTree\MvcTreeExtensionsTests.cs" />
+    <Compile Include="Unit\Components\Extensions\MvcTree\MvcTreeNodeTests.cs" />
+    <Compile Include="Unit\Components\Extensions\MvcTree\MvcTreeTests.cs" />
+    <Compile Include="Unit\Components\Extensions\MvcTree\MvcTreeView.cs" />
+    <Compile Include="Unit\Components\Extensions\Page\AuthorizationExtensionsTests.cs" />
+    <Compile Include="Unit\Components\Logging\LoggerTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\AcceptFilesAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\DigitsAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\EmailAddressAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\EqualToAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\FileSizeAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\GreaterThanAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\IntegerAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\MaxValueAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\MinLengthAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\MinValueAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\RangeAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\RequiredAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Adapters\StringLengthAdapterTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\AjaxOnlyAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\AcceptFilesAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\AreaAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\DigitsAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\EqualToAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\FileSizeAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\GreaterThanAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\IntegerAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\MaxValueAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\MinValueAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Attributes\NotTrimmedAttributeTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Binders\DateTimeModelBinderTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Binders\HttpPostedFilesModelBinderTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Binders\TrimmingModelBinderTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Extensions\ModelStateDictionaryExtensionsTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Globalization\LanguagesTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Providers\DataTypeValidatorProviderTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Providers\DisplayNameMetadataProviderTests.cs" />
+    <Compile Include="Unit\Components\Mvc\SiteMap\MvcSiteMapParserTests.cs" />
+    <Compile Include="Unit\Components\Mvc\SiteMap\MvcSiteMapProviderTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Validators\DateValidatorTests.cs" />
+    <Compile Include="Unit\Components\Mvc\Validators\NumberValidatorTests.cs" />
+    <Compile Include="Unit\Components\Mvc\ViewEngines\ViewEngineTests.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\AuthorizationFilterAttributeTests.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\AuthorizationProviderTests.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\AuthorizeAsAttributeTests.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\Controllers\AllowAnonymousController.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\Controllers\AllowUnauthorizedController.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\Controllers\Area\AuthorizedController.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\Controllers\AuthorizedController.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\Controllers\InheritedAllowAnonymousController.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\Controllers\InheritedAllowUnauthorizedController.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\Controllers\InheritedAuthorizedController.cs" />
+    <Compile Include="Unit\Components\Security\Authorization\Controllers\NotAttributedController.cs" />
+    <Compile Include="Unit\Components\Security\Cryptography\BCrypterTests.cs" />
+    <Compile Include="Unit\Components\Extensions\Principal\PrincipalExtensionsTests.cs" />
+    <Compile Include="Unit\Controllers\Administration\Accounts\AccountsControllerTests.cs" />
+    <Compile Include="Unit\Controllers\Administration\AdministrationAreaRegistrationTests.cs" />
+    <Compile Include="Unit\Controllers\Administration\Roles\RolesControllerTests.cs" />
+    <Compile Include="Unit\Controllers\Auth\AuthControllerTests.cs" />
+    <Compile Include="Unit\Controllers\BaseControllerProxy.cs" />
+    <Compile Include="Unit\Controllers\BaseControllerTests.cs" />
+    <Compile Include="Unit\Controllers\ControllerTests.cs" />
+    <Compile Include="Unit\Controllers\Datalist\DatalistControllerTests.cs" />
+    <Compile Include="Unit\Controllers\Home\HomeControllerTests.cs" />
+    <Compile Include="Unit\Controllers\Profile\ProfileControllerTests.cs" />
+    <Compile Include="Unit\Controllers\RouteConfigTests.cs" />
+    <Compile Include="Unit\Controllers\SecurityTests.cs" />
+    <Compile Include="Unit\Controllers\ServicedControllerTests.cs" />
+    <Compile Include="Unit\Controllers\ValidatedControllerTests.cs" />
+    <Compile Include="Unit\Data\Core\QueryTests.cs" />
+    <Compile Include="Unit\Data\Core\UnitOfWorkTests.cs" />
+    <Compile Include="Unit\Data\Logging\AuditLoggerTests.cs" />
+    <Compile Include="Unit\Data\Logging\LoggableEntityTests.cs" />
+    <Compile Include="Unit\Data\Logging\LoggablePropertyTests.cs" />
+    <Compile Include="Unit\Data\Mapping\ObjectMapperTests.cs" />
+    <Compile Include="Unit\Data\Migrations\InitialDataTests.cs" />
+    <Compile Include="Unit\Objects\Models\BaseModelTests.cs" />
+    <Compile Include="Unit\Objects\Views\Administration\Roles\RoleViewTests.cs" />
+    <Compile Include="Unit\Objects\Views\BaseViewTests.cs" />
+    <Compile Include="Unit\Resources\ResourceProviderTests.cs" />
+    <Compile Include="Unit\Resources\ResourcesTests.cs" />
+    <Compile Include="Unit\Services\Administration\Accounts\AccountServiceTests.cs" />
+    <Compile Include="Unit\Services\Administration\Roles\RoleServiceTests.cs" />
+    <Compile Include="Unit\Services\BaseServiceTests.cs" />
+    <Compile Include="Unit\Validators\Administration\Accounts\AccountValidatorTests.cs" />
+    <Compile Include="Unit\Validators\Administration\Roles\RoleValidatorTests.cs" />
+    <Compile Include="Unit\Validators\BaseValidatorProxy.cs" />
+    <Compile Include="Unit\Validators\BaseValidatorTests.cs" />
+    <Compile Include="Unit\Web\App_Start\BundleConfigTests.cs" />
+    <Compile Include="Unit\Web\App_Start\DependencyInjection\MainContainerTests.cs" />
+    <Compile Include="Unit\Web\MvcApplicationTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Migrations\201407060959185_Initial.cs" />
+    <Compile Include="Data\Migrations\201407060959185_Initial.Designer.cs">
+      <DependentUpon>201407060959185_Initial.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Migrations\201407060959185_Initial.resx">
+      <DependentUpon>201407060959185_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.core.2.4.1\build\xunit.core.props'))" />
+    <Error Condition="!Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.core.2.4.1\build\xunit.core.targets'))" />
+    <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.4.1\build\net20\xunit.runner.visualstudio.props'))" />
+  </Target>
+  <Import Project="..\..\packages\xunit.core.2.4.1\build\xunit.core.targets" Condition="Exists('..\..\packages\xunit.core.2.4.1\build\xunit.core.targets')" />
+</Project>

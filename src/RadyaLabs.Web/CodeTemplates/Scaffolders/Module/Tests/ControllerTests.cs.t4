@@ -1,0 +1,205 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+using <#= Model.ControllerNamespace #>;
+using RadyaLabs.Objects;
+using RadyaLabs.Services;
+using RadyaLabs.Validators;
+using NSubstitute;
+using System;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Xunit;
+
+namespace <#= Model.ControllerTestsNamespace #>
+{
+    public class <#= Model.Controller #>Tests : ControllerTests
+    {
+        private <#= Model.Controller #> controller;
+        private <#= Model.IValidator #> validator;
+        private <#= Model.IService #> service;
+        private <#= Model.View #> <#= Model.ModelVarName #>;
+
+        public <#= Model.Controller #>Tests()
+        {
+            validator = Substitute.For<<#= Model.IValidator #>>();
+            service = Substitute.For<<#= Model.IService #>>();
+
+            <#= Model.ModelVarName #> = ObjectFactory.Create<#= Model.View #>();
+
+            controller = Substitute.ForPartsOf<<#= Model.Controller #>>(validator, service);
+            controller.ControllerContext = new ControllerContext { RouteData = new RouteData() };
+        }
+
+        #region Index()
+
+        [Fact]
+        public void Index_Returns<#= Model.ShortModel #>Views()
+        {
+            service.GetViews().Returns(new <#= Model.View #>[0].AsQueryable());
+
+            Object actual = controller.Index().Model;
+            Object expected = service.GetViews();
+
+            Assert.Same(expected, actual);
+        }
+
+        #endregion
+
+        #region Create()
+
+        [Fact]
+        public void Create_ReturnsEmptyView()
+        {
+            ViewResult actual = controller.Create();
+
+            Assert.Null(actual.Model);
+        }
+
+        #endregion
+
+        #region Create(<#= Model.View #> <#= Model.ModelVarName #>)
+
+        [Fact]
+        public void Create_ProtectsFromOverpostingId()
+        {
+            ProtectsFromOverposting(controller, "Create", "Id");
+        }
+
+        [Fact]
+        public void Create_CanNotCreate_ReturnsSameView()
+        {
+            validator.CanCreate(<#= Model.ModelVarName #>).Returns(false);
+
+            Object actual = (controller.Create(<#= Model.ModelVarName #>) as ViewResult).Model;
+            Object expected = <#= Model.ModelVarName #>;
+
+            Assert.Same(expected, actual);
+        }
+
+        [Fact]
+        public void Create_<#= Model.ShortModel #>()
+        {
+            validator.CanCreate(<#= Model.ModelVarName #>).Returns(true);
+
+            controller.Create(<#= Model.ModelVarName #>);
+
+            service.Received().Create(<#= Model.ModelVarName #>);
+        }
+
+        [Fact]
+        public void Create_RedirectsToIndex()
+        {
+            validator.CanCreate(<#= Model.ModelVarName #>).Returns(true);
+
+            Object expected = RedirectIfAuthorized(controller, "Index");
+            Object actual = controller.Create(<#= Model.ModelVarName #>);
+
+            Assert.Same(expected, actual);
+        }
+
+        #endregion
+
+        #region Details(Int32 id)
+
+        [Fact]
+        public void Details_ReturnsNotEmptyView()
+        {
+            service.Get<<#= Model.View #>>(<#= Model.ModelVarName #>.Id).Returns(<#= Model.ModelVarName #>);
+
+            Object expected = NotEmptyView(controller, <#= Model.ModelVarName #>);
+            Object actual = controller.Details(<#= Model.ModelVarName #>.Id);
+
+            Assert.Same(expected, actual);
+        }
+
+        #endregion
+
+        #region Edit(Int32 id)
+
+        [Fact]
+        public void Edit_ReturnsNotEmptyView()
+        {
+            service.Get<<#= Model.View #>>(<#= Model.ModelVarName #>.Id).Returns(<#= Model.ModelVarName #>);
+
+            Object expected = NotEmptyView(controller, <#= Model.ModelVarName #>);
+            Object actual = controller.Edit(<#= Model.ModelVarName #>.Id);
+
+            Assert.Same(expected, actual);
+        }
+
+        #endregion
+
+        #region Edit(<#= Model.View #> <#= Model.ModelVarName #>)
+
+        [Fact]
+        public void Edit_CanNotEdit_ReturnsSameView()
+        {
+            validator.CanEdit(<#= Model.ModelVarName #>).Returns(false);
+
+            Object actual = (controller.Edit(<#= Model.ModelVarName #>) as ViewResult).Model;
+            Object expected = <#= Model.ModelVarName #>;
+
+            Assert.Same(expected, actual);
+        }
+
+        [Fact]
+        public void Edit_<#= Model.ShortModel #>()
+        {
+            validator.CanEdit(<#= Model.ModelVarName #>).Returns(true);
+
+            controller.Edit(<#= Model.ModelVarName #>);
+
+            service.Received().Edit(<#= Model.ModelVarName #>);
+        }
+
+        [Fact]
+        public void Edit_RedirectsToIndex()
+        {
+            validator.CanEdit(<#= Model.ModelVarName #>).Returns(true);
+
+            Object expected = RedirectIfAuthorized(controller, "Index");
+            Object actual = controller.Edit(<#= Model.ModelVarName #>);
+
+            Assert.Same(expected, actual);
+        }
+
+        #endregion
+
+        #region Delete(Int32 id)
+
+        [Fact]
+        public void Delete_ReturnsNotEmptyView()
+        {
+            service.Get<<#= Model.View #>>(<#= Model.ModelVarName #>.Id).Returns(<#= Model.ModelVarName #>);
+
+            Object expected = NotEmptyView(controller, <#= Model.ModelVarName #>);
+            Object actual = controller.Delete(<#= Model.ModelVarName #>.Id);
+
+            Assert.Same(expected, actual);
+        }
+
+        #endregion
+
+        #region DeleteConfirmed(Int32 id)
+
+        [Fact]
+        public void DeleteConfirmed_Deletes<#= Model.ShortModel #>()
+        {
+            controller.DeleteConfirmed(<#= Model.ModelVarName #>.Id);
+
+            service.Received().Delete(<#= Model.ModelVarName #>.Id);
+        }
+
+        [Fact]
+        public void DeleteConfirmed_RedirectsToIndex()
+        {
+            Object expected = RedirectIfAuthorized(controller, "Index");
+            Object actual = controller.DeleteConfirmed(<#= Model.ModelVarName #>.Id);
+
+            Assert.Same(expected, actual);
+        }
+
+        #endregion
+    }
+}

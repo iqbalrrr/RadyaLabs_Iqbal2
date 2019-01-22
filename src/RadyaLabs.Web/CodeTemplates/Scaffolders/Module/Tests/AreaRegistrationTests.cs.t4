@@ -1,0 +1,75 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+using <#= Model.ControllerNamespace #>;
+using System;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Xunit;
+
+namespace <#= Model.ControllerTestsNamespace #>
+{
+    public class <#= Model.AreaRegistration #>Tests
+    {
+        private <#= Model.AreaRegistration #> areaRegistration;
+        private AreaRegistrationContext registrationContext;
+
+        public <#= Model.AreaRegistration #>Tests()
+        {
+            areaRegistration = new <#= Model.AreaRegistration #>();
+            registrationContext = new AreaRegistrationContext(areaRegistration.AreaName, new RouteCollection());
+
+            areaRegistration.RegisterArea(registrationContext);
+        }
+
+        #region AreaName
+
+        [Fact]
+        public void AreaName_Is<#= Model.Area #>()
+        {
+            Assert.Equal("<#= Model.Area #>", areaRegistration.AreaName);
+        }
+
+        #endregion
+
+        #region RegisterArea(AreaRegistrationContext context)
+
+        [Fact]
+        public void RegisterArea_MultilingualRoute()
+        {
+            Route actual = registrationContext.Routes["<#= Model.Area #>Multilingual"] as Route;
+
+            Assert.Equal(new[] { "<#= Model.ControllerNamespace #>" }, actual.DataTokens["Namespaces"] as String[]);
+            Assert.Equal("{language}/<#= Model.Area #>/{controller}/{action}/{id}", actual.Url);
+            Assert.Equal(UrlParameter.Optional, actual.Defaults["id"]);
+            Assert.Equal("<#= Model.Area #>", actual.DataTokens["area"]);
+            Assert.Equal("<#= Model.Area #>", actual.Defaults["area"]);
+            Assert.Equal("lt", actual.Constraints["language"]);
+            Assert.Equal("[0-9]*", actual.Constraints["id"]);
+            Assert.Equal("Index", actual.Defaults["action"]);
+            Assert.Equal(2, actual.Constraints.Count);
+            Assert.Equal(3, actual.DataTokens.Count);
+            Assert.Equal(3, actual.Defaults.Count);
+        }
+
+        [Fact]
+        public void RegisterArea_DefaultRoute()
+        {
+            Route actual = registrationContext.Routes["<#= Model.Area #>"] as Route;
+
+            Assert.Equal(new[] { "<#= Model.ControllerNamespace #>" }, actual.DataTokens["Namespaces"] as String[]);
+            Assert.Equal("<#= Model.Area #>/{controller}/{action}/{id}", actual.Url);
+            Assert.Equal(UrlParameter.Optional, actual.Defaults["id"]);
+            Assert.Equal("<#= Model.Area #>", actual.DataTokens["area"]);
+            Assert.Equal("<#= Model.Area #>", actual.Defaults["area"]);
+            Assert.Equal("en", actual.Constraints["language"]);
+            Assert.Equal("[0-9]*", actual.Constraints["id"]);
+            Assert.Equal("Index", actual.Defaults["action"]);
+            Assert.Equal("en", actual.Defaults["language"]);
+            Assert.Equal(2, actual.Constraints.Count);
+            Assert.Equal(3, actual.DataTokens.Count);
+            Assert.Equal(4, actual.Defaults.Count);
+        }
+
+        #endregion
+    }
+}

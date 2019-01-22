@@ -1,0 +1,56 @@
+﻿@using RadyaLabs.Resources.Views.Auth.AccountLoginView
+
+@model AccountLoginView
+
+<div class="title text">@Pages.AuthLogin</div>
+<div class="separator"></div>
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("_AuthAlerts")
+
+    @Html.AntiForgeryToken()
+    <div class="auth-content">
+        <div class="input-group">
+            <span class="fa fa-user"></span>
+            @Html.TextBoxFor(model => model.Username, new { placeholder = Titles.Username })
+            <span class="input-error fa fa-exclamation-triangle"></span>
+        </div>
+        <div class="input-group">
+            <span class="fa fa-lock"></span>
+            @Html.PasswordFor(model => model.Password, new { placeholder = Titles.Password })
+            <span class="input-error fa fa-exclamation-triangle"></span>
+        </div>
+        @{ String rootPath = (Request.ApplicationPath ?? "").Trim('/'); }
+        @{ String returnPath = (Request.QueryString["returnUrl"] ?? rootPath).Trim('/'); }
+        @if (GlobalizationManager.Languages.Supported.Length > 1 && returnPath == rootPath)
+        {
+            <div class="input-group">
+                <div class="language-container dropdown-toggle" data-toggle="dropdown">
+                    <span class="current-language">
+                        <img src="@Url.Content(String.Format("~/Images/Flags/{0}.gif", GlobalizationManager.Languages.Current.Abbreviation))" width="16" height="11" alt="">
+                        @GlobalizationManager.Languages.Current.Name
+                    </span>
+                    <span class="caret"></span>
+                </div>
+                <ul class="dropdown-menu" role="menu">
+                    @foreach (Language language in GlobalizationManager.Languages.Supported)
+                    {
+                        <li>
+                            <a class="dropdown-item" href="@Url.Action("Login", new { language = language.Abbreviation })">
+                                <img src="@Url.Content(String.Format("~/Images/Flags/{0}.gif", language.Abbreviation))" width="16" height="11" alt="">
+                                @language.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">@Actions.Login</button>
+}
+
+<div class="separator"></div>
+<div class="auth-actions">
+    <a class="text fa fa-unlock" href="@Url.Action("Recover")" data-toggle="tooltip" data-original-title="@Strings.LostPassword" data-placement="bottom" data-delay="1"></a>
+</div>

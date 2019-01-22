@@ -1,0 +1,28 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cshtml" #>
+@model <#= Model.View #>
+
+<div class="col">
+    <div class="widget-box readonly">
+        <div class="widget-header">
+            <span class="icon fa fa-th-list"></span>
+            <h5>@Headers.<#= Model.Model #></h5>
+            <div class="widget-header-buttons">
+                @if (Html.IsAuthorizedFor("Edit"))
+                {
+                    <a class="btn" href="@Url.Action("Edit", new { Model.Id })">
+                        <span class="fa fa-pencil-alt"></span><span class="text">@Actions.Edit</span>
+                    </a>
+                }
+                @if (Html.IsAuthorizedFor("Delete"))
+                {
+                    <a class="btn" href="@Url.Action("Delete", new { Model.Id })">
+                        <span class="fa fa-times"></span><span class="text">@Actions.Delete</span>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="widget-content">
+        </div>
+    </div>
+</div>

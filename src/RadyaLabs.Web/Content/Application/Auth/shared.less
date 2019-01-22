@@ -1,0 +1,110 @@
+﻿.auth-content {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px inset, rgba(255, 255, 255, 0.4) 0 1px 0;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 4px;
+
+    div:last-child {
+        border-bottom-style: none;
+    }
+
+    .input-group {
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 4px 12px;
+        width: 100%;
+
+        .fa {
+            position: absolute;
+            top: 13px;
+
+            &.fa-user {
+                left: 14px;
+            }
+
+            &.fa-lock {
+                left: 15px;
+            }
+
+            &.fa-flag {
+                left: 13px;
+            }
+        }
+
+        img {
+            margin-bottom: 3px;
+            margin-right: 5px;
+        }
+
+        input {
+            border-style: none;
+            padding-left: 25px;
+            height: 30px;
+            width: 100%;
+
+            &::-ms-clear {
+                display: none;
+            }
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:focus {
+                box-shadow: 0 50px #ffffff inset;
+            }
+
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            }
+        }
+
+        .input-error {
+            color: #dc3545;
+            display: none;
+            right: 13px;
+        }
+
+        .input-validation-error {
+            padding-right: 25px;
+
+            + .input-error {
+                display: block;
+            }
+        }
+
+        .dropdown-toggle::after {
+            margin-top: 0.6em;
+        }
+
+        .dropdown-menu {
+            right: 16px;
+            left: 16px;
+        }
+    }
+
+    .language-container {
+        padding: 5px 0 0 1px;
+        cursor: pointer;
+        display: flex;
+        height: 30px;
+        width: 100%;
+
+        .current-language {
+            text-align: left;
+            width: 100%;
+        }
+    }
+}
+
+.auth-actions {
+    text-align: right;
+
+    a {
+        display: inline-block;
+        font-size: 1.8em;
+        padding: 5px;
+
+        &:hover {
+            color: #396b86;
+        }
+    }
+}

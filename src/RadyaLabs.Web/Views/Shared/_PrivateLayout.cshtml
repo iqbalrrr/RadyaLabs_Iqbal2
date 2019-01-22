@@ -1,0 +1,143 @@
+﻿<!doctype html>
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewBag.Title ?? ResourceProvider.GetPageTitle(ViewContext.RouteData.Values))</title>
+
+    @Styles.Render("~/content/private/lib.css")
+    @Html.RenderControllerStyle()
+    @Html.RenderActionStyle()
+</head>
+<body class="private">
+    <div class="header">
+        <div class="btn">
+            <a href="@Url.Action("Edit", "Profile", new { area = "" })">
+                <i class="fa fa-user"></i>
+                <span class="text">@Actions.Profile</span>
+            </a>
+        </div>
+        @if (GlobalizationManager.Languages.Supported.Length > 1)
+        {
+            <div class="btn dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" aria-expanded="true">
+                    <i class="fa fa-flag"></i>
+                    <span class="text">@Actions.Language</span>
+                    <span class="caret"></span>
+                </a>
+                <div role="menu" class="dropdown-menu">
+                    @foreach (Language language in GlobalizationManager.Languages.Supported)
+                    {
+                        <a class="dropdown-item" href="@Url.Action("Index", "Home", new { area = "", language = language.Abbreviation })">
+                            <img src="@Url.Content(String.Format("~/Images/Flags/{0}.gif", language.Abbreviation))" width="16" height="11" alt="">
+                            @language.Name
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+        <div class="btn">
+            <a href="@Url.Action("Logout", "Auth", new { area = "" })">
+                <i class="fa fa-share"></i>
+                <span class="text">@Actions.Logout</span>
+            </a>
+        </div>
+    </div>
+
+    @Html.Partial("MvcDatalist/_Dialog")
+
+    <div class="content">
+        <div class="menu">
+            <div class="menu-search">
+                <input placeholder="@(Actions.Search)..." />
+            </div>
+
+            @SiteMap(MvcSiteMap.Provider.GetSiteMap(ViewContext))
+        </div>
+        <div class="content-container">
+            <div class="separator"></div>
+
+            <div class="content-breadcrumb">
+                @{ MvcSiteMapNode[] breadcrumb = MvcSiteMap.Provider.GetBreadcrumb(ViewContext).ToArray(); }
+                @for (Int32 i = 0; i < breadcrumb.Length; i++)
+                {
+                    MvcSiteMapNode node = breadcrumb[i];
+                    if (i == breadcrumb.Length - 1)
+                    {
+                        <a class="current">
+                            <i class="icon @node.IconClass"></i>
+                            <span class="text">@ResourceProvider.GetSiteMapTitle(node.Area, node.Controller, node.Action)</span>
+                        </a>
+                    }
+                    else if (node.Action != null)
+                    {
+                        <a href="@Url.Action(node.Action, node.Controller, new {area = node.Area})">
+                            <i class="icon @node.IconClass"></i>
+                            <span class="text">@ResourceProvider.GetSiteMapTitle(node.Area, node.Controller, node.Action)</span>
+                        </a>
+                        <span class="fa fa-angle-right"></span>
+                    }
+                }
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="alerts col-12">
+                        @foreach (Alert alert in TempData["Alerts"] as AlertsContainer)
+                        {
+                            <div id="@alert.Id" class="alert alert-@alert.Type.ToString().ToLowerInvariant()" data-timeout="@alert.Timeout">
+                                <span>@alert.Message</span><span class="close">×</span>
+                            </div>
+                        }
+                    </div>
+
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        @DateTime.Now.Year &copy; All rights reserved.
+    </div>
+
+    @Scripts.Render("~/scripts/private/lib.js")
+    @Html.RenderControllerScript()
+    @Html.RenderActionScript()
+    @Scripts.Render("~/scripts/app/shared.js")
+</body>
+</html>
+
+@helper SiteMap(IEnumerable<MvcSiteMapNode> nodes)
+{
+    <ul>
+        @foreach (MvcSiteMapNode node in nodes)
+        {
+            String link = node.Action != null ? Url.Action(node.Action, node.Controller, new { area = node.Area }) : "#";
+            String menu = node.HasActiveChildren ? "has-active open" : "";
+            menu += node.Children.Any() ? " submenu" : "";
+            menu += node.IsActive ? " active" : "";
+            menu = menu.Trim();
+
+            <li class="@menu">
+                <a href="@link">
+                    <span class="icon @node.IconClass"></span>
+                    <span class="text">@ResourceProvider.GetSiteMapTitle(node.Area, node.Controller, node.Action)</span>
+                    @if (node.Action == null)
+                    {
+                        <span class="toggle fa fa-angle-right"></span>
+                    }
+                </a>
+                @if (node.Children.Any())
+                {
+                    @SiteMap(node.Children)
+                }
+            </li>
+        }
+    </ul>
+}

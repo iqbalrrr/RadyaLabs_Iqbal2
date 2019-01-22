@@ -1,0 +1,42 @@
+﻿@model RoleView
+
+<div class="col">
+    <div class="widget-box readonly">
+        <div class="widget-header">
+            <span class="icon fa fa-th-list"></span>
+            <h5>@Headers.Role</h5>
+            <div class="widget-header-buttons">
+                @if (Html.IsAuthorizedFor("Edit"))
+                {
+                    <a class="btn" href="@Url.Action("Edit", new { Model.Id })">
+                        <span class="fa fa-pencil-alt"></span><span class="text">@Actions.Edit</span>
+                    </a>
+                }
+                @if (Html.IsAuthorizedFor("Delete"))
+                {
+                    <a class="btn" href="@Url.Action("Delete", new { Model.Id })">
+                        <span class="fa fa-times"></span><span class="text">@Actions.Delete</span>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="widget-content">
+            <div class="form-group">
+                <div class="control-label col-md-3 col-lg-2">
+                    @Html.FormLabelFor(model => model.Title)
+                </div>
+                <div class="control-content col-md-9 col-lg-5">
+                    @Html.FormTextBoxFor(model => model.Title)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-3 col-lg-2">
+                    @Html.FormLabelFor(model => model.Permissions)
+                </div>
+                <div class="control-content col-md-9 col-lg-5">
+                    @Html.TreeFor(model => model.Permissions, 2)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

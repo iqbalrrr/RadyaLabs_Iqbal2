@@ -1,0 +1,11 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace RadyaLabs.Objects
+{
+    public class <#= Model.Model #> : BaseModel
+    {
+    }
+}

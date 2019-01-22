@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+<div class="title text">@Pages.HomeNotFound</div>
+
+<div class="separator"></div>
+
+<div class="error text fa fa-search"></div>
+
+<div class="separator"></div>
+
+<div class="describtion text">@Strings.PageNotFound</div>
+@Html.ActionLink(Pages.HomeIndex, "Index", null, new { @class = "btn btn-primary public-action" })

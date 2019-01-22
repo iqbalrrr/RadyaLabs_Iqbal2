@@ -1,0 +1,23 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cshtml" #>
+@model <#= Model.View #>
+
+<div class="col">
+    <div class="widget-box">
+        <div class="widget-header">
+            <span class="icon fa fa-th-list"></span>
+            <h5>@Headers.<#= Model.Model #></h5>
+        </div>
+        <div class="widget-content">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="form-actions col-lg-7">
+                        <button type="submit" class="btn btn-primary">@Actions.Submit</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

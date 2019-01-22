@@ -1,0 +1,54 @@
+﻿@model AccountView
+
+<div class="col">
+    <div class="widget-box readonly">
+        <div class="widget-header">
+            <span class="icon fa fa-th-list"></span>
+            <h5>@Headers.Account</h5>
+            <div class="widget-header-buttons">
+                @if (Html.IsAuthorizedFor("Edit"))
+                {
+                    <a class="btn" href="@Url.Action("Edit", new { Model.Id })">
+                        <span class="fa fa-pencil-alt"></span><span class="text">@Actions.Edit</span>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="widget-content">
+            <div class="form-group">
+                <div class="control-label col-md-3 col-lg-2">
+                    @Html.FormLabelFor(model => model.Username)
+                </div>
+                <div class="control-content col-md-9 col-lg-5">
+                    @Html.FormTextBoxFor(model => model.Username)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-3 col-lg-2">
+                    @Html.FormLabelFor(model => model.Email)
+                </div>
+                <div class="control-content col-md-9 col-lg-5">
+                    @Html.FormTextBoxFor(model => model.Email)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-3 col-lg-2">
+                    @Html.FormLabelFor(model => model.IsLocked)
+                </div>
+                <div class="control-content col-md-9 col-lg-5">
+                    @Html.CheckBoxFor(model => model.IsLocked)
+                </div>
+            </div>
+            <div class="form-group">
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-3 col-lg-2">
+                    @Html.FormLabelFor(model => model.RoleTitle)
+                </div>
+                <div class="control-content col-md-9 col-lg-5">
+                    @Html.FormTextBoxFor(model => model.RoleTitle)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

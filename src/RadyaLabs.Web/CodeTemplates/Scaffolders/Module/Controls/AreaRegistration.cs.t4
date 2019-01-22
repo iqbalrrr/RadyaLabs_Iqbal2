@@ -1,0 +1,31 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+using System;
+using System.Web.Mvc;
+
+namespace <#= Model.ControllerNamespace #>
+{
+    public class <#= Model.AreaRegistration #> : AreaRegistration
+    {
+        public override String AreaName => "<#= Model.Area #>";
+
+        public override void RegisterArea(AreaRegistrationContext context)
+        {
+            context
+                .MapRoute(
+                    "<#= Model.Area #>Multilingual",
+                    "{language}/<#= Model.Area #>/{controller}/{action}/{id}",
+                    new { area = "<#= Model.Area #>", action = "Index", id = UrlParameter.Optional },
+                    new { language = "lt", id = "[0-9]*" },
+                    new[] { "<#= Model.ControllerNamespace #>" });
+
+            context
+                .MapRoute(
+                    "<#= Model.Area #>",
+                    "<#= Model.Area #>/{controller}/{action}/{id}",
+                    new { language = "en", area = "<#= Model.Area #>", action = "Index", id = UrlParameter.Optional },
+                    new { language = "en", id = "[0-9]*" },
+                    new[] { "<#= Model.ControllerNamespace #>" });
+        }
+    }
+}

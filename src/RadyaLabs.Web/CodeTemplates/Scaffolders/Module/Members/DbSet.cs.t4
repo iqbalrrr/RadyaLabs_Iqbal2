@@ -1,0 +1,3 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+protected DbSet<<#= Model.Model #>> <#= Model.Models #> { get; set; }

@@ -1,0 +1,13 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+using RadyaLabs.Objects;
+using System;
+
+namespace RadyaLabs.Validators
+{
+    public interface <#= Model.IValidator #> : IValidator
+    {
+        Boolean CanCreate(<#= Model.View #> view);
+        Boolean CanEdit(<#= Model.View #> view);
+    }
+}

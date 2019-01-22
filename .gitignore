@@ -1,0 +1,9 @@
+/tools/packages/
+/packages/
+App_Data/
+/.vs/
+bin/
+obj/
+
+*.user
+*.suo
